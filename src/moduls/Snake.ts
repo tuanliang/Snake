@@ -35,3 +35,4 @@ class Snake{
         this.element.insertAdjacentHTML("beforeend","<div></div>")
     }
 }
+export default Snake
