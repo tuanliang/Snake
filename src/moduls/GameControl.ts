@@ -20,7 +20,7 @@ import ScorePanel from './ScorePanel';
     constructor(){
         this.snake=new Snake();
         this.food=new Food();
-        this.scorePanel=new ScorePanel()
+        this.scorePanel=new ScorePanel(10,1)
         this.init()
     }
 
@@ -35,9 +35,11 @@ import ScorePanel from './ScorePanel';
     //创建键盘按下的响应函数 event.key:ArrowDow ArrowRigh ArrowU ArrowLeft
     keydownHandler(event:KeyboardEvent){
         //需要检查event.key的值是否合法（用户是否按了正确的键）
+        console.log(event.key);
+        
         //修改direction属性
         this.directiion=event.key;
-
+        
         
     }
     //创建一个控制蛇移动的方法
