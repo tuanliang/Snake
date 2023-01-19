@@ -14,6 +14,8 @@ import ScorePanel from './ScorePanel';
 
     //创建一个属性来存储蛇的移动方向（也就是按键的方向）
     directiion:string="";
+    //创建一个属性记录游戏是否结束
+    isLive= true
 
     constructor(){
         this.snake=new Snake();
@@ -58,11 +60,34 @@ import ScorePanel from './ScorePanel';
                 X+=10;
                 break;
         }
-        this.snake.X=X;
-        this.snake.Y=Y;
+
+        //检查蛇是否吃到了食物
+       this.checkEat(X,Y)
+
+        try{
+            this.snake.X=X;
+            this.snake.Y=Y;
+        }catch(e){
+            //说明蛇撞墙了，游戏结束
+            alert('游戏结束')
+            //将isLive设置为false
+            this.isLive=false
+        }
+        
 
         //开启一个定时器
-        setTimeout(this.run.bind(this),300-(this.scorePanel.level-1)*30)
+        this.isLive && setTimeout(this.run.bind(this),300-(this.scorePanel.level-1)*30)
+    }
+    
+    //定义一个方法，检查蛇是否吃到食物
+    checkEat(X:number,Y:number){
+        if( X === this.food.X && Y === this.food.Y){
+            this.food.change();
+            //分数增加
+            this.scorePanel.addScore();
+            //蛇增加一节1
+            this.snake.addBody();
+        }
     }
  }
 
